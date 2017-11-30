@@ -16,7 +16,7 @@ public class PatternManager : MonoBehaviour {
 		TriggerPatterns (type, motorIntensity, temperatureIntensity, duration, startOffset);
 	}
 
-	void TriggerPatterns (string type, float motorIntensity, float temperatureIntensity, float duration, float startOffset){
+	public void TriggerPatterns (string type, float motorIntensity, float temperatureIntensity, float duration, float startOffset){
 		switch (type) {
 		case "stroke": 
 			Stroke (motorIntensity, temperatureIntensity, duration, startOffset);
@@ -32,7 +32,7 @@ public class PatternManager : MonoBehaviour {
 		}
 	}
 
-	void Stroke(float motorStrength, float temperatureIntensity, float duration, float startOffset)
+	public void Stroke(float motorStrength, float temperatureIntensity, float duration, float startOffset)
 	{
 		StartCoroutine(TriggerPeltierStuff(38, 0 , temperatureIntensity, 0f, 0.0f));
 		StartCoroutine(TriggerPeltierStuff(39, 0 , temperatureIntensity, 0f, duration));
@@ -45,13 +45,13 @@ public class PatternManager : MonoBehaviour {
 		StartCoroutine(TriggerArduinoStuff(40, motorStrength , temperatureIntensity, duration, startOffset));
 	}
 
-	void Poke(float motorStrength,float temperatureIntensity, float duration, float startOffset)
+	public void Poke(float motorStrength,float temperatureIntensity, float duration, float startOffset)
 	{
 		StartCoroutine(TriggerPeltierStuff(38, 0 , temperatureIntensity,0f, 0.0f));
 		StartCoroutine(TriggerArduinoStuff(38, motorStrength , temperatureIntensity,duration, startOffset));
 	}
 		
-	IEnumerator TriggerArduinoStuff(int moduleId, float motorIntensity, float temperatureIntensity, float duration, float startOffset) // 0 - 255
+	public IEnumerator TriggerArduinoStuff(int moduleId, float motorIntensity, float temperatureIntensity, float duration, float startOffset) // 0 - 255
 	{
 		yield return new WaitForSeconds(startOffset);
 		string message = moduleId + " " + motorIntensity + " " + temperatureIntensity;
@@ -61,7 +61,7 @@ public class PatternManager : MonoBehaviour {
 		Uduino.UduinoManager.Instance.Write(message :  "TriggerModule " + message);
 	}
 
-	IEnumerator TriggerPeltierStuff(int moduleId, float motorIntensity, float temperatureIntensity, float duration, float startOffset) // 0 - 255
+	public IEnumerator TriggerPeltierStuff(int moduleId, float motorIntensity, float temperatureIntensity, float duration, float startOffset) // 0 - 255
 	{
 		yield return new WaitForSeconds(startOffset);
 		string message = moduleId + " " + motorIntensity + " " + temperatureIntensity;

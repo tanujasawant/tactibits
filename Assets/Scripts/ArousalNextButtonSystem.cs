@@ -3,49 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NextButtonSystem : MonoBehaviour {
-	public Toggle p7,p6,p5,p4,p3,p2,p1;
+public class ArousalNextButtonSystem : MonoBehaviour {
 	public Toggle e1,e2,e3,e4,e5,e6,e7;
-
+	int value=0;
 	public void ActiveToggle(){
-
-		if (p1.isOn) {
-			Debug.Log ("Participant selected p1");
-		} else if (p2.isOn) {
-			Debug.Log ("Participant selected p2");
-		} else if (p3.isOn) {
-			Debug.Log ("Participant selected p3");
-		} else if (p4.isOn) {
-			Debug.Log ("Participant selected p4");
-		} else if (p5.isOn) {
-			Debug.Log ("Participant selected p5");
-		} else if (p6.isOn) {
-			Debug.Log ("Participant selected p6");
-		} else if (p7.isOn) {
-			Debug.Log ("Participant selected p7");
-		}
 
 		if (e1.isOn) {
 			Debug.Log ("Participant selected e1");
+			value = 1;
 		} else if (e2.isOn) {
 			Debug.Log ("Participant selected e2");
+			value = 2;
 		} else if (e3.isOn) {
 			Debug.Log ("Participant selected e3");
+			value = 3;
 		} else if (e4.isOn) {
 			Debug.Log ("Participant selected e4");
+			value = 4;
 		} else if (e5.isOn) {
 			Debug.Log ("Participant selected e5");
+			value = 5;
 		} else if (e6.isOn) {
-			Debug.Log ("Participant selected e6");
+			Debug.Log ("Participant selected e6");	
+			value = 6;
 		} else if (e7.isOn) {
 			Debug.Log ("Participant selected e7");
+			value = 7;
 		}
+	}
 
+	public void setAllTogglesOff(){
+		e1.isOn = false;
+		e2.isOn = false;
+		e3.isOn = false;
+		e4.isOn = false;
+		e5.isOn = false;
+		e6.isOn = false;
+		e7.isOn = false;
 	}
 
 	public void onNext(){
 		Debug.Log ("Next clicked");
-		ActiveToggle ();
+		ActiveToggle ();	
+		setAllTogglesOff ();
+		ExperienceController.Instance.ArousalPanelClicked(value);
 	}
 
 
